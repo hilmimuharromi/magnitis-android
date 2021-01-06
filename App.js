@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
+import { store, persistor } from '@stores/store';
+import { Provider } from 'react-redux';
 import Routes from "./src/Routes"
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-const Stack = createStackNavigator();
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 const App = () => {
   useEffect(() => {
@@ -25,7 +19,11 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <Routes />
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Routes />
+          </PersistGate>
+        </Provider>
       </NavigationContainer>
     </>
   );
