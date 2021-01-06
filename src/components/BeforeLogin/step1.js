@@ -12,7 +12,7 @@ const BeforeLogin = ({ navigation }) => {
                         require("@assets/logokampus.png")} />
             </View>
             <View style={{ flex: 3, justifyContent: "center", alignContent: "center" }}>
-                <View style={{ flex: 1, flexDirection: "column", alignContent: "center", alignItems: "center" }}>
+                <View style={{ flex: 1, flexDirection: "column", alignContent: "center", alignItems: "center", padding: 10 }}>
                     <Image
                         style={styles.imageStep}
                         source={

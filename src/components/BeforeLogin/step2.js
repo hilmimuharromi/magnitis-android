@@ -10,17 +10,17 @@ const BeforeLogin = ({ navigation }) => {
                 source={
                     require("@assets/logokampus.png")} />
         </View>
-        <View style={{ flex: 3, justifyContent: "center", alignContent: "center" }}>
+        <View style={{ flex: 3, justifyContent: "center", alignContent: "center",  padding: 10 }}>
             <View style={{ flex: 1, flexDirection: "column", alignContent: "center", alignItems: "center" }}>
                 <Image
                     style={styles.imageStep}
                     source={
                         require("@assets/step2.png")} />
                 <Text style={styles.titleText}>
-                    Aplikasi berisikan materi konsep medan magnet, {"\n"}
-                    aplikasi konsep medan magnet {"\n"}
-                     dalam kehidupan sehari-hari, praktikum virtual (Phet), {"\n"}
-                      Contoh dan pembahasan soal, {"\n"}
+                    Aplikasi berisikan materi konsep medan magnet, 
+                    aplikasi konsep medan magnet
+                     dalam kehidupan sehari-hari, praktikum virtual (Phet),
+                      Contoh dan pembahasan soal,
                        serta evaluasi untuk mengetahui kemampuan siswa.
                     </Text>
             </View>
