@@ -9,13 +9,13 @@ const Stack = createStackNavigator();
 const BeforeLogin = (props) => {
     const { dataUser, navigation } = props
 
-    useEffect(() => {
-        if (dataUser) {
-            console.log(dataUser, "data user")
-            navigation.navigate("HomeScreen")
-        }
-        // eslint-disable-next-line
-    }, [dataUser])
+    // useEffect(() => {
+    //     if (dataUser) {
+    //         console.log(dataUser, "data user before login")
+    //         navigation.navigate("HomeScreen")
+    //     }
+    //     // eslint-disable-next-line
+    // }, [dataUser])
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="step1" component={Step1} />
