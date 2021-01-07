@@ -28,7 +28,7 @@ const LoginScreen = (props) => {
 
     useEffect(() => {
         if (dataUser) {
-            navigation.navigate("HomeScreen")
+            navigation.navigate('Main', { screen: 'Home' })
         }
         // eslint-disable-next-line
     }, [dataUser])
