@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@native-html/iframe-plugin": "^1.1.1",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.2",
@@ -22,11 +23,14 @@
     "react-native-bootsplash": "^3.1.2",
     "react-native-dotenv": "^2.4.3",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-htmlview": "^0.16.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "^1.13.2",
+    "react-native-render-html": "^5.0.1",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.16.1",
     "react-native-vector-icons": "^7.1.0",
+    "react-native-webview": "^11.0.2",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",

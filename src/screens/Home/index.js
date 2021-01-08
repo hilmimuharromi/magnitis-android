@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import CardMenu from "@components/CardMenu"
 
@@ -40,6 +40,8 @@ const Home = (props) => {
         }
     ]
     return (
+        <>
+        <StatusBar backgroundColor="#fff" barStyle={"dark-content"} />
         <View style={styles.container}>
             <View style={styles.viewLogo}>
                 <Image
@@ -49,17 +51,25 @@ const Home = (props) => {
                 <Text style={styles.textHalo}> Hai {username} !</Text>
             </View>
             <View style={styles.viewMenu}>
-                {listMenu.map((item) => (<CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />))}
+                <FlatList
+                data={listMenu}
+                horizontal={false}
+                numColumns={3}
+                renderItem={({item}) => <CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />}
+                />
+                {/* {listMenu.map((item) => (<CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />))} */}
             </View>
         </View>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 5,
-        justifyContent: "center"
+        // padding: 5,
+        justifyContent: "center",
+        backgroundColor: "#fff"
     },
     viewLogo: {
         flex: 2,

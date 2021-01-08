@@ -13,7 +13,6 @@ const BeforeLogin = (props) => {
             <Stack.Screen name="step2" component={Step2} />
             <Stack.Screen name="step3" component={Step3} />
         </Stack.Navigator>)
-
 }
 
 const mapStateToProps = state => {

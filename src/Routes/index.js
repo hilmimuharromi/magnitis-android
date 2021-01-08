@@ -8,6 +8,8 @@ import LoginScreen from "@Screens/Login"
 import RegisterScreen from "@Screens/Register"
 import BeforeLoginScreen from "@Screens/BeforeLogin"
 import SettingScreen from "@Screens/Setting"
+import PendahuluanScreen from "@Screens/Pendahuluan"
+import DaftarPustakaScreen from "@Screens/DaftarPustaka"
 import BottomTab from "@components/BottomTab"
 
 const Stack = createStackNavigator();
@@ -24,21 +26,21 @@ const Routes = (props) => {
         );
     }
 
-    function PendahuluanScreen() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Pendahuluan!</Text>
-            </View>
-        );
-    }
+    // function PendahuluanScreen() {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <Text>Pendahuluan!</Text>
+    //         </View>
+    //     );
+    // }
 
-    function DaftarPustakaScreen() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>DaftarPustaka!</Text>
-            </View>
-        );
-    }
+    // function DaftarPustakaScreen() {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <Text>DaftarPustaka!</Text>
+    //         </View>
+    //     );
+    // }
 
     const AfterLogin = () => {
         return (
