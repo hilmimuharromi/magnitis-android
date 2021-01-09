@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
     View,
     Text,
@@ -8,15 +9,63 @@ import {
     Platform,
     StyleSheet,
     StatusBar,
-    Alert,
-    Image
+    Image,
+    ActivityIndicator
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { API_URL } from "@env"
+import axios from "axios"
+import { SetUser } from "@stores/action"
 
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = (props) => {
+    const { SetUser, dataUser, navigation } = props
     const [hidePassword, setHidePassword] = useState(true)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (dataUser) {
+            navigation.navigate('Main', { screen: 'Home' })
+        }
+        // eslint-disable-next-line
+    }, [dataUser])
+
+    const submit = async () => {
+        console.log(email, password, API_URL)
+        setLoading(true)
+        try {
+            const { data } = await axios({
+                method: "post",
+                url: `${API_URL}/register`,
+                data: {
+                    name,
+                    email,
+                    password,
+                    role: "2"
+                }
+            })
+            if (data.status) {
+                console.log(data)
+                SetUser(data.data)
+                // return message.success(`halo ${data.data.name}, anda berhasil login`)
+            }
+        } catch (e) {
+            console.log("error login", e)
+            // let { data } = e.response
+            // if (data.message) {
+            //     return message.error(data.message)
+            // } else {
+            //     return message.error("gagal Login")
+            // }
+        } finally {
+            setLoading(false)
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -37,33 +86,53 @@ const RegisterScreen = ({ navigation }) => {
                 <View>
                     <View style={styles.layoutInput}>
                         <Icon size={30} color="#B89AD3" active type="FontAwesome" name="user" />
-                        <TextInput style={styles.input} placeholder="Name" />
+                        <TextInput onChangeText={(text) => setName(text)} style={styles.input} placeholder="Name" />
                     </View>
                     <View style={styles.layoutInput}>
                         <Icon size={30} color="#B89AD3" active type="FontAwesome" name="envelope" />
-                        <TextInput style={styles.input} keyboardType="email-address" placeholder="Email" />
+                        <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} keyboardType="email-address" placeholder="Email" />
                     </View>
                     <View style={styles.layoutInput}>
                         <Icon color="#B89AD3" size={35} active type="FontAwesome" name="lock" />
-                        <TextInput style={styles.input} secureTextEntry={hidePassword} placeholder="Password" />
+                        <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} secureTextEntry={hidePassword} placeholder="Password" />
                         {hidePassword ?
                             <Icon color="#000" size={30} type="FontAwesome" name="eye-slash" onPress={() => setHidePassword(false)} /> :
                             <Icon color="#B89AD3" size={30} type="FontAwesome" name="eye" onPress={() => setHidePassword(true)} />
                         }
                     </View>
                 </View>
-                <TouchableOpacity style={styles.buttonLogin}>
-                    <Text style={styles.text_footer}> Register </Text>
-                </TouchableOpacity>
-                <Text style={{ color: "black", textAlign: "center", marginTop: 20 }}
-                    onPress={() => navigation.navigate("LoginScreen")}
-                > Belum Memiliki akun ? Login </Text>
+                {loading ? <ActivityIndicator size="small" color="#B89AD3" /> :
+                    <>
+                        <TouchableOpacity onPress={submit} style={styles.buttonLogin}>
+                            <Text style={styles.text_footer}> Register </Text>
+                        </TouchableOpacity>
+                        <Text style={{ color: "black", textAlign: "center", marginTop: 20 }}
+                            onPress={() => navigation.navigate("LoginScreen")}
+                        > SudahMemiliki akun ? Login </Text>
+
+                    </>
+                }
             </Animatable.View>
         </View>
     );
 };
 
-export default RegisterScreen;
+
+const mapStateToProps = state => {
+    const { user } = state;
+    const { data, loading } = user
+    console.log("data state user", user)
+
+    return {
+        dataUser: data,
+        loading
+    };
+}
+const mapDispatchToProps = {
+    SetUser,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
 
 const styles = StyleSheet.create({
     container: {

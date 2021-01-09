@@ -9,8 +9,8 @@ import {
     Platform,
     StyleSheet,
     StatusBar,
-    Alert,
-    Image
+    Image,
+    ActivityIndicator
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,10 +21,11 @@ import { SetUser } from "@stores/action"
 
 
 const LoginScreen = (props) => {
-    const { loading, SetLoading, SetUser, dataUser, navigation } = props
+    const { SetUser, dataUser, navigation } = props
     const [hidePassword, setHidePassword] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (dataUser) {
@@ -36,6 +37,7 @@ const LoginScreen = (props) => {
 
     const submit = async () => {
         console.log(email, password, API_URL)
+        setLoading(true)
         try {
             const { data } = await axios({
                 method: "post",
@@ -60,7 +62,7 @@ const LoginScreen = (props) => {
             //     return message.error("gagal Login")
             // }
         } finally {
-            // SetLoading(false)
+            setLoading(false)
         }
     }
 
@@ -95,12 +97,17 @@ const LoginScreen = (props) => {
                         }
                     </View>
                 </View>
-                <TouchableOpacity style={styles.buttonLogin} onPress={submit}>
-                    <Text style={styles.text_footer}> Login </Text>
-                </TouchableOpacity>
-                <Text style={{ color: "black", textAlign: "center", marginTop: 20 }}
-                    onPress={() => navigation.navigate("RegisterScreen")}
-                > Belum Memiliki akun ? Register </Text>
+                {loading ? <ActivityIndicator size="small" color="#B89AD3" /> :
+                    <>
+                        <TouchableOpacity style={styles.buttonLogin} onPress={submit}>
+                            <Text style={styles.text_footer}> Login </Text>
+                        </TouchableOpacity>
+                        <Text style={{ color: "black", textAlign: "center", marginTop: 20 }}
+                            onPress={() => navigation.navigate("RegisterScreen")}
+                        > Belum Memiliki akun ? Register </Text>
+                    </>
+
+                }
             </Animatable.View>
         </View>
     );
@@ -109,7 +116,6 @@ const LoginScreen = (props) => {
 const mapStateToProps = state => {
     const { user } = state;
     const { data, loading } = user
-    console.log("data state user", user)
 
     return {
         dataUser: data,

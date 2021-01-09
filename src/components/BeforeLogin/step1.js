@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 const BeforeLogin = ({ navigation }) => {
@@ -26,11 +26,9 @@ const BeforeLogin = ({ navigation }) => {
                 </View>
             </View>
             <View style={{ flex: 2 }}>
-                <Button
-                    style={styles.buttonStep}
-                    title="Next"
-                    onPress={() => navigation.navigate('BeforeLoginScreen', { screen: 'step2' })}
-                />
+                <TouchableOpacity style={styles.buttonStep} onPress={() => navigation.navigate('BeforeLoginScreen', { screen: 'step2' })}>
+                    <Text style={styles.text_footer}>Next </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -55,7 +53,14 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     buttonStep: {
-        width: 10
+        backgroundColor: "#B89AD3",
+        height: 40,
+        alignItems: "center",
+        paddingVertical: 5
+    },
+    text_footer: {
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
 

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, FlatList, StatusBar, Modal, } from 'react-native';
 import { connect } from 'react-redux';
 import CardMenu from "@components/CardMenu"
 
@@ -7,12 +7,13 @@ import CardMenu from "@components/CardMenu"
 const Home = (props) => {
     const { dataUser, navigation } = props
     const username = dataUser.name
+    const [modalVisible, setModalVisible] = useState(false);
 
     const listMenu = [
         {
             key: 1,
             name: "PENDAHULUAN",
-            path: "pendahuluan"
+            path: "Pendahuluan"
         }, {
             key: 2,
             name: "KI/KD",
@@ -21,45 +22,45 @@ const Home = (props) => {
         {
             key: 3,
             name: "PETA KONSEP",
-            path: "petaKonsep"
+            path: "Peta Konsep"
 
         },
         {
             key: 4,
             name: "KEGIATAN PEMBELAJARAN",
-            path: "pembelajaran"
+            path: "Pembelajaran"
         },
         {
             key: 5,
             name: "GLOSARIUM",
-            path: "glosarium"
+            path: "Glosarium"
         }, {
             key: 6,
             name: "DAFTAR PUSTAKA",
-            path: "daftarPustaka"
+            path: "Daftar Pustaka"
         }
     ]
     return (
         <>
-        <StatusBar backgroundColor="#fff" barStyle={"dark-content"} />
-        <View style={styles.container}>
-            <View style={styles.viewLogo}>
-                <Image
-                    style={styles.imageLogo}
-                    source={
-                        require("@assets/magnitis.png")} />
-                <Text style={styles.textHalo}> Hai {username} !</Text>
+            <StatusBar backgroundColor="#fff" barStyle={"dark-content"} />
+            <View style={styles.container}>
+                <View style={styles.viewLogo}>
+                    <Image
+                        style={styles.imageLogo}
+                        source={
+                            require("@assets/magnitis.png")} />
+                    <Text style={styles.textHalo}> Hai {username} !</Text>
+                </View>
+                <View style={styles.viewMenu}>
+                    <FlatList
+                        data={listMenu}
+                        horizontal={false}
+                        numColumns={3}
+                        renderItem={({ item }) => <CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />}
+                    />
+                    {/* {listMenu.map((item) => (<CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />))} */}
+                </View>
             </View>
-            <View style={styles.viewMenu}>
-                <FlatList
-                data={listMenu}
-                horizontal={false}
-                numColumns={3}
-                renderItem={({item}) => <CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />}
-                />
-                {/* {listMenu.map((item) => (<CardMenu key={item.key} label={item.name} path={item.path} navigation={navigation} />))} */}
-            </View>
-        </View>
         </>
     )
 }
@@ -69,6 +70,9 @@ const styles = StyleSheet.create({
         flex: 1,
         // padding: 5,
         justifyContent: "center",
+        flexDirection: "column",
+        alignContent: "center",
+        alignItems: "center",
         backgroundColor: "#fff"
     },
     viewLogo: {
@@ -80,12 +84,6 @@ const styles = StyleSheet.create({
     },
     viewMenu: {
         flex: 2,
-        justifyContent: "center",
-        display: "flex",
-        alignContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-        flexWrap: "wrap"
     },
     imageLogo: {
         width: 300,

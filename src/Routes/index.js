@@ -10,78 +10,80 @@ import BeforeLoginScreen from "@Screens/BeforeLogin"
 import SettingScreen from "@Screens/Setting"
 import PendahuluanScreen from "@Screens/Pendahuluan"
 import DaftarPustakaScreen from "@Screens/DaftarPustaka"
+import GlosariumScreen from "@Screens/Glosarium"
+import KIKDScreen from "@Screens/KIKD"
+import ProfileScreen from "@Screens/Profile"
+import PetaKonsep from "@Screens/PetaKonsep"
+import Pembelajaran from "@Screens/Pembelajaran"
+
+
 import BottomTab from "@components/BottomTab"
 
 const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
 const Routes = (props) => {
     const { dataUser } = props
 
-    function ProfileScreen() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>profile !</Text>
-            </View>
-        );
-    }
-
-    // function PendahuluanScreen() {
-    //     return (
-    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //             <Text>Pendahuluan!</Text>
-    //         </View>
-    //     );
-    // }
-
-    // function DaftarPustakaScreen() {
-    //     return (
-    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //             <Text>DaftarPustaka!</Text>
-    //         </View>
-    //     );
-    // }
-
-    const AfterLogin = () => {
+    const Main = () => {
         return (
             <>
-
                 <Tab.Navigator
                     initialRouteName="Home"
                     tabBar={(props) => <BottomTab {...props} />}
                 >
                     <Tab.Screen name="Profile" component={ProfileScreen} />
-                    <Tab.Screen name="Home" component={HomeScreen} />
+                    <Tab.Screen name="Home" component={MenuScreen} />
                     <Tab.Screen name="Setting" component={SettingScreen} />
                 </Tab.Navigator>
             </>
-
         )
+    }
+
+    function MenuScreen() {
+        return (
+            <HomeStack.Navigator
+                initialRouteName="Home"
+            >
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Pendahuluan" component={PendahuluanScreen} />
+                <Stack.Screen name="Glosarium" component={GlosariumScreen} />
+                <Stack.Screen screenOptions={{ headerShown: true }} name="Daftar Pustaka" component={DaftarPustakaScreen} />
+                <Stack.Screen name="ki_kd" component={KIKDScreen} />
+                <Stack.Screen name="Peta Konsep" component={PetaKonsep} />
+                <Stack.Screen name="Pembelajaran" component={PetaKonsep} />
+            </HomeStack.Navigator>
+        );
     }
 
 
 
+
     return (
-        <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-        >
+        <>
             {
                 !dataUser ? (
-                    <>
+                    <Stack.Navigator
+                        screenOptions={{ headerShown: false }}
+                    >
                         <Stack.Screen name="BeforeLoginScreen" component={BeforeLoginScreen} />
                         <Stack.Screen name="LoginScreen" component={LoginScreen} />
                         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-                    </>
-                ) : (
-                        <>
-                            <Stack.Screen name="Main" component={AfterLogin} />
-                            <Stack.Screen name="pendahuluan" component={PendahuluanScreen} />
-                            <Stack.Screen name="daftarPustaka" component={DaftarPustakaScreen} />
-                        </>
+                    </Stack.Navigator>
+                )
+                    :
+                    (
+                        <Stack.Navigator
+                            screenOptions={{ headerShown: false }}
+                        >
+                            <Stack.Screen name="Main" component={Main} />
+                        </Stack.Navigator>
+
                     )
             }
-        </Stack.Navigator>
-
+        </>
     )
 }
 

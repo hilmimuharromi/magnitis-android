@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button, Image, StyleSheet, ImageBackground } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 
 
 const BeforeLogin = ({ navigation }) => {
@@ -10,14 +10,14 @@ const BeforeLogin = ({ navigation }) => {
                 source={
                     require("@assets/logokampus.png")} />
         </View>
-        <View style={{ flex: 3, justifyContent: "center", alignContent: "center",  padding: 10 }}>
+        <View style={{ flex: 3, justifyContent: "center", alignContent: "center", padding: 10 }}>
             <View style={{ flex: 1, flexDirection: "column", alignContent: "center", alignItems: "center" }}>
-            <ImageBackground source={require("@assets/bgstep3.png")} style={styles.imageBg} >
-                <Image
-                    style={styles.imageStep}
-                    source={
-                        { uri: "https://video-public.canva.com/VADsKtxmp_U/v/97c5d29085.gif" }} />
-                        </ImageBackground>
+                <ImageBackground source={require("@assets/bgstep3.png")} style={styles.imageBg} >
+                    <Image
+                        style={styles.imageStep}
+                        source={
+                            { uri: "https://video-public.canva.com/VADsKtxmp_U/v/97c5d29085.gif" }} />
+                </ImageBackground>
                 <Text style={styles.titleText}>
                     Belajar semakin seru karena aplikasi{"\n"}
                     dilengkapi dengan animasi, video, dan {"\n"}
@@ -26,11 +26,9 @@ const BeforeLogin = ({ navigation }) => {
             </View>
         </View>
         <View style={{ flex: 2 }}>
-            <Button
-                style={styles.buttonStep}
-                title="Next"
-                onPress={() => navigation.navigate("LoginScreen")}
-            />
+            <TouchableOpacity style={styles.buttonStep} onPress={() => navigation.navigate("LoginScreen")}>
+                <Text style={styles.text_footer}>Next </Text>
+            </TouchableOpacity>
         </View>
     </View>
 }
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 400,
-        width:  400
+        width: 400
     },
     titleText: {
         fontFamily: "Cochin",
@@ -60,7 +58,14 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     buttonStep: {
-        width: 10
+        backgroundColor: "#B89AD3",
+        height: 40,
+        alignItems: "center",
+        paddingVertical: 5
+    },
+    text_footer: {
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
 

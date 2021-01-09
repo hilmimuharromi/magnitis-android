@@ -1,22 +1,43 @@
-import React from "react"
-import { ScrollView, useWindowDimensions } from "react-native";
-import HTML from "react-native-render-html";
+import React, { useEffect } from "react"
+import { View, Text, ScrollView, RefreshControl } from "react-native";
+import HtmlRender from "@components/HtmlRender"
+import { connect } from 'react-redux';
+import { GetPage } from "@stores/action"
 
-const DaftarPustaka = () => {
-    const contentWidth = useWindowDimensions().width;
+const DaftarPustaka = ({ data, loading, GetPage }) => {
+  useEffect(() => {
+    GetPage("daftar-pustaka")
+  }, [])
 
-    const htmlContent = `
-    <h1>This HTML snippet is now rendered with native components !</h1>
-    <h2>Enjoy a webview-free and blazing fast application</h2>
-    <img src="https://i.imgur.com/dHLmxfO.jpg?2" />
-    <em style="textAlign: center;">Look at how happy this native cat is</em>
-`;
-
+  if (loading) {
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <HTML source={{ html: htmlContent }} contentWidth={contentWidth} />
-      </ScrollView>
-    );
+      <View>
+        <Text>Loading .... </Text>
+      </View>
+    )
+  }
+  return (
+    <ScrollView style={{ flex: 1, padding: 5, backgroundColor: "#fff" }}
+      refreshControl={
+        <RefreshControl refreshing={loading} onRefresh={() => GetPage("daftar-pustaka")} />
+      }
+    >
+      <HtmlRender data={data} />
+    </ScrollView>
+  );
 }
 
-export default DaftarPustaka
+const mapStateToProps = state => {
+  const { pages } = state;
+  const { data, loading } = pages
+
+  return {
+    data,
+    loading
+  };
+}
+const mapDispatchToProps = {
+  GetPage
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DaftarPustaka);
