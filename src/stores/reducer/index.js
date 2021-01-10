@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import user from "./user"
 import pages from "./pages"
+import playlist from "./playlist"
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const reducers = combineReducers({
     user,
-    pages
+    pages,
+    playlist
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

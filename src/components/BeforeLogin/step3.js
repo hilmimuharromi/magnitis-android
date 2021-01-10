@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
 
+const windowWidth = Dimensions.get('window').width;
+// const windowWidth = useWindowDimensions().width;
 
 const BeforeLogin = ({ navigation }) => {
     return <View style={{ flex: 1 }}>
@@ -40,16 +42,17 @@ const styles = StyleSheet.create({
         resizeMode: 'center',
     },
     imageStep: {
-        width: 300,
-        height: 300
+        width: "70%",
+        height: "70%"
     },
     imageBg: {
         flex: 1,
-        resizeMode: "cover",
+        resizeMode: "center",
         justifyContent: "center",
         alignItems: "center",
-        height: 400,
-        width: 400
+        height: "100%",
+        width: windowWidth,
+        backgroundColor: "red"
     },
     titleText: {
         fontFamily: "Cochin",

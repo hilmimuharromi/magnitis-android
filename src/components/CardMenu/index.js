@@ -1,7 +1,10 @@
 import React from "react"
-import { View, Text, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
-
+const windowWidth = Dimensions.get('window').width;
+const wp = (percent) => {
+    return windowWidth * percent / 100
+}
 const primaryColor = "#B89AD3"
 const secondaryColor = "#a2dfd9"
 const CardMenu = (props) => {
@@ -15,13 +18,12 @@ const CardMenu = (props) => {
             </Text>
         </TouchableOpacity>
     )
-
 }
 
 
 const styles = StyleSheet.create({
     container: {
-        width: 120,
+        width: wp(30),
         height: 120,
         justifyContent: "center",
         alignItems: "center",

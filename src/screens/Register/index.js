@@ -10,7 +10,8 @@ import {
     StyleSheet,
     StatusBar,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    ToastAndroid
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,6 +28,10 @@ const RegisterScreen = (props) => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
 
+    const showToast = (message) => {
+        ToastAndroid.showWithGravity(message, ToastAndroid.SHORT, ToastAndroid.TOP);
+    };
+
     useEffect(() => {
         if (dataUser) {
             navigation.navigate('Main', { screen: 'Home' })
@@ -36,6 +41,7 @@ const RegisterScreen = (props) => {
 
     const submit = async () => {
         console.log(email, password, API_URL)
+        if (!email || !password || !name) return showToast("Mohon Lengkapi Data")
         setLoading(true)
         try {
             const { data } = await axios({
@@ -49,18 +55,17 @@ const RegisterScreen = (props) => {
                 }
             })
             if (data.status) {
-                console.log(data)
                 SetUser(data.data)
-                // return message.success(`halo ${data.data.name}, anda berhasil login`)
+                return showToast("Berhasil Register")
             }
         } catch (e) {
-            console.log("error login", e)
-            // let { data } = e.response
-            // if (data.message) {
-            //     return message.error(data.message)
-            // } else {
-            //     return message.error("gagal Login")
-            // }
+            console.log("error register", e)
+            let { data } = e.response
+            if (data.message) {
+                return showToast(data.message)
+            } else {
+                return showToast("gagal Register")
+            }
         } finally {
             setLoading(false)
         }

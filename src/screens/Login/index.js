@@ -10,7 +10,8 @@ import {
     StyleSheet,
     StatusBar,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    ToastAndroid
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,6 +28,10 @@ const LoginScreen = (props) => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
 
+    const showToast = (message) => {
+        ToastAndroid.showWithGravity(message, ToastAndroid.SHORT, ToastAndroid.TOP);
+    };
+
     useEffect(() => {
         if (dataUser) {
             navigation.navigate('Main', { screen: 'Home' })
@@ -37,6 +42,7 @@ const LoginScreen = (props) => {
 
     const submit = async () => {
         console.log(email, password, API_URL)
+        if (!email || !password) return showToast("Mohon Lengkapi Data")
         setLoading(true)
         try {
             const { data } = await axios({
@@ -55,12 +61,12 @@ const LoginScreen = (props) => {
             }
         } catch (e) {
             console.log("error login", e)
-            // let { data } = e.response
-            // if (data.message) {
-            //     return message.error(data.message)
-            // } else {
-            //     return message.error("gagal Login")
-            // }
+            let { data } = e.response
+            if (data.message) {
+                return showToast(data.message)
+            } else {
+                return showToast("gagal Login, silahkan ulangi")
+            }
         } finally {
             setLoading(false)
         }

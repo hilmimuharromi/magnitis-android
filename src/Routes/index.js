@@ -18,7 +18,6 @@ import Pembelajaran from "@Screens/Pembelajaran"
 
 
 import BottomTab from "@components/BottomTab"
-
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
@@ -53,7 +52,7 @@ const Routes = (props) => {
                 <Stack.Screen screenOptions={{ headerShown: true }} name="Daftar Pustaka" component={DaftarPustakaScreen} />
                 <Stack.Screen name="ki_kd" component={KIKDScreen} />
                 <Stack.Screen name="Peta Konsep" component={PetaKonsep} />
-                <Stack.Screen name="Pembelajaran" component={PetaKonsep} />
+                <Stack.Screen name="Pembelajaran" component={Pembelajaran} />
             </HomeStack.Navigator>
         );
     }
