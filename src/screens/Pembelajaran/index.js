@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { Fragment, useEffect } from "react"
 import { View, Text, StyleSheet, FlatList, RefreshControl, Dimensions, ScrollView } from "react-native";
 import { connect } from 'react-redux';
 import { GetPlaylist } from "@stores/action"
@@ -10,7 +10,7 @@ const windowWidth = Dimensions.get('window').width;
 const wp = (percent) => {
     return windowWidth * percent / 100
 }
-const Pembelajaran = ({ data, loading, GetPlaylist }) => {
+const Pembelajaran = ({ data, loading, GetPlaylist, navigation }) => {
 
     useEffect(() => {
         GetPlaylist()
@@ -27,7 +27,7 @@ const Pembelajaran = ({ data, loading, GetPlaylist }) => {
     if (!data) {
         return (
             <ScrollView
-                style={{ flex: 1 }}
+                style={{ flex: 1, padding: 5 }}
                 refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={() => GetPlaylist()} />
                 }
@@ -38,26 +38,22 @@ const Pembelajaran = ({ data, loading, GetPlaylist }) => {
     }
 
     return (
-        <View style={styles.container}>
             <FlatList
+            style={styles.container}
                 data={data}
-                renderItem={({ item }) => <CardPembelajaran key={item.key} item={item} />}
+                renderItem={({ item }) => 
+                    <CardPembelajaran key={item.key} item={item} navigation={navigation} />}
                 refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={() => GetPlaylist()} />
                 }
+                keyExtractor={ (item, index) => index.toString() }
             />
-        </View>
-
-
     );
 }
 const styles = StyleSheet.create({
     container: {
         width: wp(100),
-        alignContent: "center",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingTop: 10,
+        padding: 5,
         backgroundColor: "#fff"
     }
 

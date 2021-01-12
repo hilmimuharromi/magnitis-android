@@ -17,7 +17,7 @@ const Home = (props) => {
         }, {
             key: 2,
             name: "KI/KD",
-            path: "ki_kd"
+            path: "KI/KD"
         },
         {
             key: 3,

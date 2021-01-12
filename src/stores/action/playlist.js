@@ -6,7 +6,6 @@ const GetPlaylist = (title) => {
         try {
             const { data } = await axios.get(`${API_URL}/playlist/Magnitis`)
             if (data.status) {
-                console.log("get playlist", data.data.contents)
                 dispatch(SetDataPlaylist(data.data.contents))
             }
         } catch (e) {

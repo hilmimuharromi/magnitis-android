@@ -1,8 +1,11 @@
 import { SetUser } from "./user"
-import { GetPage } from "./pages"
+import { GetPage , SetDataPage} from "./pages"
 import { GetPlaylist } from "./playlist"
+import {SetDataQuiz} from "./quiz"
 export {
     SetUser,
     GetPage,
-    GetPlaylist
+    SetDataPage,
+    GetPlaylist,
+    SetDataQuiz
 }

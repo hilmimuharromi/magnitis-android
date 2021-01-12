@@ -57,6 +57,7 @@ const LoginScreen = (props) => {
             if (data.status) {
                 console.log(data)
                 SetUser(data.data)
+            navigation.navigate('Main', { screen: 'Home' })
                 // return message.success(`halo ${data.data.name}, anda berhasil login`)
             }
         } catch (e) {
