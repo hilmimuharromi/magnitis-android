@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: "100%",
         width: windowWidth,
-        backgroundColor: "red"
     },
     titleText: {
         fontFamily: "Cochin",

@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.magnitisandroid",
+    package = "com.magnitis",
 )
 
 android_resource(
     name = "res",
-    package = "com.magnitisandroid",
+    package = "com.magnitis",
     res = "src/main/res",
 )
 

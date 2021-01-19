@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, StatusBar, Modal, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, FlatList, StatusBar, } from 'react-native';
 import { connect } from 'react-redux';
 import CardMenu from "@components/CardMenu"
-
+import { GetQuizResult } from "@stores/action"
 
 const Home = (props) => {
-    const { dataUser, navigation } = props
+    const { dataUser, navigation, GetQuizResult } = props
     const username = dataUser.name
     const [modalVisible, setModalVisible] = useState(false);
+
+    useEffect(() => {
+        GetQuizResult(dataUser.userId)
+    }, [])
 
     const listMenu = [
         {
@@ -108,8 +112,7 @@ const mapStateToProps = state => {
     };
 }
 const mapDispatchToProps = {
-    // SetUser,
-    // SetLoading
+    GetQuizResult
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

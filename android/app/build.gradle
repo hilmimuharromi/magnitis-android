@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.magnitisandroid"
+        applicationId "com.magnitis"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

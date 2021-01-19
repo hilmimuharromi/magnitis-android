@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Step1, Step2, Step3 } from "@components/BeforeLogin"

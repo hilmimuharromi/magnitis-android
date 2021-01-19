@@ -1,22 +1,23 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
-import { SetDataPage, SetDataQuiz } from "@stores/action"
-import {useDispatch} from "react-redux"
+import { SetDataPage, SetDataQuiz, GetQuizResult } from "@stores/action"
+import { useDispatch } from "react-redux"
 const windowWidth = Dimensions.get('window').width;
 const wp = (percent) => {
     return windowWidth * percent / 100
 }
 const primaryColor = "#B89AD3"
 const secondaryColor = "#a2dfd9"
-const CardPembelajaran = ({ item , navigation}) => {
+const CardPembelajaran = ({ item, navigation, userId }) => {
     const dispatch = useDispatch()
     if (item.flag === "post") {
         return (
-            <TouchableOpacity style={styles.container} 
-            onPress={() => {
-                dispatch(SetDataPage(item.post.content))
-                navigation.navigate("Materi", {title: item.post.title})}}
-                >
+            <TouchableOpacity style={styles.container}
+                onPress={() => {
+                    dispatch(SetDataPage(item.post.content))
+                    navigation.navigate("Materi", { title: item.post.title })
+                }}
+            >
                 <View style={styles.title}>
                     <Text style={styles.textTitle}>{item.post.title}</Text>
                 </View>
@@ -28,17 +29,20 @@ const CardPembelajaran = ({ item , navigation}) => {
     } else {
         return (
             <TouchableOpacity style={styles.container}
-            onPress={() => {
-                dispatch(SetDataQuiz(item.quiz.contents))
-                navigation.navigate("Quiz", {title: item.quiz.title})}}
+                onPress={() => {
+                    dispatch(GetQuizResult(item.quiz._id, userId))
+
+                    dispatch(SetDataQuiz(item.quiz))
+                    navigation.navigate("Quiz", { title: item.quiz.title })
+                }}
             >
-            <View style={styles.title}>
-                <Text style={styles.textTitle}>{item.quiz.title}</Text>
-            </View>
-            <View style={styles.tagQuiz}>
-                <Text style={styles.textTitle}>Test</Text>
-            </View>
-        </TouchableOpacity>
+                <View style={styles.title}>
+                    <Text style={styles.textTitle}>{item.quiz.title}</Text>
+                </View>
+                <View style={styles.tagQuiz}>
+                    <Text style={styles.textTitle}>Test</Text>
+                </View>
+            </TouchableOpacity>
         )
     }
 }

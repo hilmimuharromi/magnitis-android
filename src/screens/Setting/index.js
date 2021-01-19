@@ -31,23 +31,22 @@ const SettingScreen = (props) => {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor='#B89AD3' barStyle="light-content" />
-            <View>
-                <Text>Setting Page</Text>
-            </View>
             <View style={styles.header}>
+                <TouchableOpacity onPress={() => navigation.navigate("Petunjuk")} style={styles.buttonPrimary}>
+                    <Text style={styles.text_header}>Petunjuk Penggunaan</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={submit} style={styles.buttonLogout}>
                     <Text style={styles.text_header}>Logout</Text>
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </View >
     );
 };
 
 const mapStateToProps = state => {
     const { user } = state;
     const { data, loading } = user
-    console.log("data state user", user)
 
     return {
         dataUser: data,
@@ -66,16 +65,25 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: "flex-end",
         paddingHorizontal: 20,
         paddingBottom: 50,
     },
-
-    buttonLogout: {
+    buttonPrimary: {
         backgroundColor: "#B89AD3",
-        height: 40,
+        height: 50,
         alignItems: "center",
-        paddingVertical: 5
+        alignContent: "center",
+        justifyContent: "center",
+        marginVertical: 30
+    },
+    buttonLogout: {
+        backgroundColor: "red",
+        height: 50,
+        alignItems: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        marginVertical: 30
     },
     text_header: {
         color: "#fff"

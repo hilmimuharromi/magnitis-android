@@ -5,6 +5,8 @@ import user from "./user"
 import pages from "./pages"
 import playlist from "./playlist"
 import quiz from "./quiz"
+import quizResult from "./quizResult"
+import petunjuk from "./petunjuk"
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
@@ -18,7 +20,9 @@ const reducers = combineReducers({
     user,
     pages,
     playlist,
-    quiz
+    quiz,
+    quizResult,
+    petunjuk
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

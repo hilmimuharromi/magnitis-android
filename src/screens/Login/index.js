@@ -41,8 +41,9 @@ const LoginScreen = (props) => {
 
 
     const submit = async () => {
-        console.log(email, password, API_URL)
+
         if (!email || !password) return showToast("Mohon Lengkapi Data")
+
         setLoading(true)
         try {
             const { data } = await axios({
@@ -55,13 +56,13 @@ const LoginScreen = (props) => {
                 }
             })
             if (data.status) {
-                console.log(data)
+
                 SetUser(data.data)
-            navigation.navigate('Main', { screen: 'Home' })
+                navigation.navigate('Main', { screen: 'Home' })
                 // return message.success(`halo ${data.data.name}, anda berhasil login`)
             }
         } catch (e) {
-            console.log("error login", e)
+
             let { data } = e.response
             if (data.message) {
                 return showToast(data.message)

@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const primaryColor = "#B89AD3"
-const secondaryColor = "#a2dfd9"
+const secondaryColor = "#5271FF"
 export default function BottomTab({ state, navigation }) {
     const size = 25
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "@Screens/Home"
 import LoginScreen from "@Screens/Login"
@@ -17,6 +17,7 @@ import PetaKonsep from "@Screens/PetaKonsep"
 import Pembelajaran from "@Screens/Pembelajaran"
 import MateriScreen from "@Screens/Materi"
 import QuizScreen from "@Screens/Quiz"
+import PetunjukScreen from "@Screens/Petunjuk"
 
 
 import BottomTab from "@components/BottomTab"
@@ -56,13 +57,13 @@ const Routes = (props) => {
                 <Stack.Screen screenOptions={{ headerShown: true }} name="Daftar Pustaka" component={DaftarPustakaScreen} />
                 <Stack.Screen name="KI/KD" component={KIKDScreen} />
                 <Stack.Screen name="Peta Konsep" component={PetaKonsep} />
-                <Stack.Screen 
-                name="Pembelajaran"
-                options={({ route }) => ({ 
-                    title: "Kegiatan Pembelajaran", 
-                    headerShown: true
-                })}
-                component={Pembelajaran} />
+                <Stack.Screen
+                    name="Pembelajaran"
+                    options={({ route }) => ({
+                        title: "Kegiatan Pembelajaran",
+                        headerShown: true
+                    })}
+                    component={Pembelajaran} />
             </HomeStack.Navigator>
         );
     }
@@ -85,21 +86,28 @@ const Routes = (props) => {
                     :
                     (
                         <Stack.Navigator
-                        mode="modal"
+                            mode="modal"
                         >
                             <Stack.Screen
-                            options={{
-                                headerShown: false
-                            }}   
-                            name="Main" component={Main} />
+                                options={{
+                                    headerShown: false
+                                }}
+                                name="Main" component={Main} />
 
                             <Stack.Screen
-                            options={({ route }) => ({ title: route.params.title })}
-                            name="Materi" component={MateriScreen} />
+                                options={({ route }) => ({ title: route.params.title })}
+                                name="Materi" component={MateriScreen} />
 
                             <Stack.Screen
-                            options={({ route }) => ({ title: route.params.title })}
-                            name="Quiz" component={QuizScreen} />
+                                options={({ route }) => ({ title: route.params.title })}
+                                name="Quiz" component={QuizScreen} />
+
+                            <Stack.Screen
+                                // options={({ route }) => ({ title: route.params.title })}
+                                options={{
+                                    headerShown: false
+                                }}
+                                name="Petunjuk" component={PetunjukScreen} />
                         </Stack.Navigator>
 
                     )

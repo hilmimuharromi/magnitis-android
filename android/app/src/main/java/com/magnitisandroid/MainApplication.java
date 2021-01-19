@@ -1,4 +1,4 @@
-package com.magnitisandroid;
+package com.magnitis;
 
 import android.app.Application;
 import android.content.Context;

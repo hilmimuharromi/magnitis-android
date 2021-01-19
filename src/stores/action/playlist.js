@@ -8,6 +8,7 @@ const GetPlaylist = (title) => {
             if (data.status) {
                 dispatch(SetDataPlaylist(data.data.contents))
             }
+
         } catch (e) {
             dispatch(SetDataPlaylist([]))
         } finally {

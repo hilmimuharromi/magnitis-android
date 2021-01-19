@@ -40,7 +40,7 @@ const RegisterScreen = (props) => {
     }, [dataUser])
 
     const submit = async () => {
-        console.log(email, password, API_URL)
+        // console.log(email, password, API_URL)
         if (!email || !password || !name) return showToast("Mohon Lengkapi Data")
         setLoading(true)
         try {
@@ -126,7 +126,6 @@ const RegisterScreen = (props) => {
 const mapStateToProps = state => {
     const { user } = state;
     const { data, loading } = user
-    console.log("data state user", user)
 
     return {
         dataUser: data,
